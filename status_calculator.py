@@ -11,6 +11,42 @@ def calculate_stats(base_stats, ivs, evs, level, nature_modifiers):
             stats[stat_name] = int(raw_stat * nature_modifiers[stat_name])
     return stats
 
+def get_evs_from_user():
+    evs = {}
+    stat_names = ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"]
+
+    print("Enter the Effort Values (EVs) for each stat:")
+    for stat_name in stat_names:
+        while True:
+            try:
+                ev = int(input(f"{stat_name}: "))
+                if 0 <= ev <= 252:
+                    evs[stat_name] = ev
+                    break
+                else:
+                    print(f"Invalid input. {stat_name} EVs should be between 0 and 252.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+    return evs
+
+def get_nature_modifiers_from_user():
+    nature_modifiers = {}
+    stat_names = ["HP", "Attack", "Defense", "Sp. Atk", "Sp. Def", "Speed"]
+
+    print("Enter the Nature Modifiers for each stat:")
+    for stat_name in stat_names:
+        while True:
+            try:
+                modifier = float(input(f"{stat_name}: "))
+                if 0.1 <= modifier <= 2.0:
+                    nature_modifiers[stat_name] = modifier
+                    break
+                else:
+                    print(f"Invalid input. {stat_name} Nature Modifier should be between 0.1 and 2.0.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+    return nature_modifiers
+
 base_stats = {
     "HP": 45,
     "Attack": 49,
